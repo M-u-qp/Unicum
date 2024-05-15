@@ -1,5 +1,6 @@
 package com.example.unicum.ui.theme
 
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 
 val Purple80 = Color(0xFFD0BCFF)
@@ -9,3 +10,22 @@ val Pink80 = Color(0xFFEFB8C8)
 val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
+
+val gradientPrice = androidx.compose.ui.graphics.Brush.linearGradient(
+    colors = listOf(
+        Color(0xFF1D1412),
+        Color(0xFF160E0C),
+        Color(0xFF231917)
+    ),
+    start = Offset.Zero,
+    end = Offset.Infinite
+)
+
+val gradientCard = androidx.compose.ui.graphics.Brush.linearGradient(
+    colors = listOf(
+        Color(0xFF19110E),
+        Color(0xFF100909)
+    ),
+    start = Offset.Zero,
+    end = Offset.Infinite
+)

@@ -9,12 +9,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(): ViewModel() {
+class MainViewModel @Inject constructor() : ViewModel() {
 
     var startDestination by mutableStateOf(Route.AppStartNavigation.route)
         private set
 
     init {
-
+        startDestination = Route.HomeScreen.route
     }
 }

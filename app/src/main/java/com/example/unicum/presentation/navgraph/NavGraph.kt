@@ -22,7 +22,7 @@ fun NavGraph(
             startDestination = Route.HomeScreen.route
         ) {
             composable(route = Route.HomeScreen.route) {
-                HomeScreen()
+
             }
         }
     }
