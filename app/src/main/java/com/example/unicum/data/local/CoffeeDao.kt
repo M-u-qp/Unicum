@@ -5,18 +5,22 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.unicum.domain.model.Coffee
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CoffeeDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(coffee: Coffee)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun update(coffee: Coffee)
 
-    @Delete
-    suspend fun delete(coffee: Coffee)
+    @Insert
+    suspend fun insert(listCoffee: List<Coffee>)
 
     @Query("SELECT * FROM Coffee")
     fun getCoffees(): Flow<List<Coffee>>
+
+    @Query("SELECT * FROM Coffee WHERE id=:id")
+    suspend fun getCoffee(id: Int): Coffee?
 }

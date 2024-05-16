@@ -15,8 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             UnicumTheme {
-                val startDestination = viewModel.startDestination
-                NavGraph(startDestination = startDestination)
+                NavGraph(startDestination = viewModel.startDestination.value)
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.example.unicum
 
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -11,10 +12,10 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor() : ViewModel() {
 
-    var startDestination by mutableStateOf(Route.AppStartNavigation.route)
-        private set
+    private val _startDestination = mutableStateOf(Route.AppStartNavigation.route)
+        val startDestination: State<String> = _startDestination
 
     init {
-        startDestination = Route.HomeScreen.route
+        _startDestination.value = Route.AppStartNavigation.route
     }
 }

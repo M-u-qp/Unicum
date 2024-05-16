@@ -4,7 +4,8 @@ import com.example.unicum.domain.repository.CoffeeRepository
 
 data class CoffeeUseCases(
     val coffeeRepository: CoffeeRepository,
-    val upsertCoffee: UpsertCoffee,
-    val deleteCoffee: DeleteCoffee,
-    val selectCoffees: SelectCoffees
+    val updateCoffee: UpdateCoffee,
+    val insertCoffees: InsertCoffees,
+    val selectCoffees: SelectCoffees,
+    val selectCoffee: SelectCoffee
 )

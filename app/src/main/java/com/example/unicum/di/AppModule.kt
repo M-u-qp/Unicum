@@ -7,9 +7,10 @@ import com.example.unicum.data.local.CoffeeDatabase
 import com.example.unicum.data.repository.CoffeeRepositoryImpl
 import com.example.unicum.domain.repository.CoffeeRepository
 import com.example.unicum.domain.usecases.CoffeeUseCases
-import com.example.unicum.domain.usecases.DeleteCoffee
+import com.example.unicum.domain.usecases.InsertCoffees
+import com.example.unicum.domain.usecases.SelectCoffee
 import com.example.unicum.domain.usecases.SelectCoffees
-import com.example.unicum.domain.usecases.UpsertCoffee
+import com.example.unicum.domain.usecases.UpdateCoffee
 import com.example.unicum.utils.Constants.COFFEE_DATABASE_NAME
 import dagger.Module
 import dagger.Provides
@@ -23,7 +24,9 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCoffeeRepository(): CoffeeRepository = CoffeeRepositoryImpl()
+    fun provideCoffeeRepository(
+        coffeeDao: CoffeeDao
+    ): CoffeeRepository = CoffeeRepositoryImpl(coffeeDao = coffeeDao)
 
     @Provides
     @Singleton
@@ -33,9 +36,10 @@ object AppModule {
     ): CoffeeUseCases {
         return CoffeeUseCases(
             coffeeRepository = coffeeRepository,
-            upsertCoffee = UpsertCoffee(coffeeDao),
-            deleteCoffee = DeleteCoffee(coffeeDao),
-            selectCoffees = SelectCoffees(coffeeDao)
+            updateCoffee = UpdateCoffee(coffeeDao),
+            insertCoffees = InsertCoffees(coffeeDao),
+            selectCoffees = SelectCoffees(coffeeDao),
+            selectCoffee = SelectCoffee(coffeeDao)
         )
     }
 

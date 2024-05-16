@@ -5,7 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface CoffeeRepository {
 
-    suspend fun upsertCoffee(coffee: Coffee)
-    suspend fun deleteCoffee(coffee: Coffee)
+   suspend fun updateCoffee(coffee: Coffee)
+
+   suspend fun insertCoffees(listCoffee: List<Coffee>)
     fun getCoffees(): Flow<List<Coffee>>
+    suspend fun getCoffee(id: Int): Coffee?
 }
