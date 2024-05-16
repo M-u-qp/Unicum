@@ -8,14 +8,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.example.unicum.domain.model.Coffee
 import com.example.unicum.presentation.Dimens.MediumPadding1
-import com.example.unicum.presentation.navgraph.Route
 import com.example.unicum.presentation.screens.home.components.CoffeeList
 
 @Composable
 fun HomeScreen(
     state: HomeState,
-    navigate: (String) -> Unit
+    navigateToDetails: (Coffee) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -29,7 +29,7 @@ fun HomeScreen(
 
         CoffeeList(
             coffees = state.coffees,
-            onClick = { navigate(Route.DetailsScreen.route) }
+            onClick = navigateToDetails
         )
     }
 

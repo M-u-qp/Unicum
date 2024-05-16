@@ -7,6 +7,7 @@ import com.example.unicum.data.local.CoffeeDatabase
 import com.example.unicum.data.repository.CoffeeRepositoryImpl
 import com.example.unicum.domain.repository.CoffeeRepository
 import com.example.unicum.domain.usecases.CoffeeUseCases
+import com.example.unicum.domain.usecases.DeleteCoffees
 import com.example.unicum.domain.usecases.InsertCoffees
 import com.example.unicum.domain.usecases.SelectCoffee
 import com.example.unicum.domain.usecases.SelectCoffees
@@ -38,6 +39,7 @@ object AppModule {
             coffeeRepository = coffeeRepository,
             updateCoffee = UpdateCoffee(coffeeDao),
             insertCoffees = InsertCoffees(coffeeDao),
+            deleteCoffees = DeleteCoffees(coffeeDao),
             selectCoffees = SelectCoffees(coffeeDao),
             selectCoffee = SelectCoffee(coffeeDao)
         )

@@ -4,6 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Modifier
 import com.example.unicum.presentation.navgraph.NavGraph
 import com.example.unicum.ui.theme.UnicumTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,7 +20,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             UnicumTheme {
-                NavGraph(startDestination = viewModel.startDestination.value)
+                Box(
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.background)
+                        .fillMaxSize()
+                ) {
+                    NavGraph()
+                }
             }
         }
     }

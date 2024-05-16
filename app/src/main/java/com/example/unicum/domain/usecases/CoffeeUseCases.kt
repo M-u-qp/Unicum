@@ -6,6 +6,7 @@ data class CoffeeUseCases(
     val coffeeRepository: CoffeeRepository,
     val updateCoffee: UpdateCoffee,
     val insertCoffees: InsertCoffees,
+    val deleteCoffees: DeleteCoffees,
     val selectCoffees: SelectCoffees,
     val selectCoffee: SelectCoffee
 )

@@ -1,7 +1,6 @@
 package com.example.unicum.data.local
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -17,6 +16,9 @@ interface CoffeeDao {
 
     @Insert
     suspend fun insert(listCoffee: List<Coffee>)
+
+    @Query("DELETE FROM Coffee")
+    fun deleteAll()
 
     @Query("SELECT * FROM Coffee")
     fun getCoffees(): Flow<List<Coffee>>
