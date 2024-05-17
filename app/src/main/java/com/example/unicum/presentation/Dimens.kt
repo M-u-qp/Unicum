@@ -26,6 +26,7 @@ object Dimens {
     val MediumFontSize1 = 17.sp
     val MediumFontSize2 = 16.sp
     val MediumFontSize3 = 18.sp
+    val MediumFontSize4 = 20.sp
 
     //border
     val NormalBorder1 = 1.dp

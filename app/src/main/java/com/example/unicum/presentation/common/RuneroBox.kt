@@ -1,4 +1,4 @@
-package com.example.unicum.presentation.screens.home.components
+package com.example.unicum.presentation.common
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box

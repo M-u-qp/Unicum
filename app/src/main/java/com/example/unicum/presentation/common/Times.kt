@@ -39,7 +39,7 @@ fun CurrentTime() {
             fontWeight = FontWeight.Bold,
             fontSize = Dimens.MediumFontSize2,
             fontFamily = FontFamily(Font(R.font.montserrat_regular)),
-            color = colorResource(id = R.color.runero)
+            color = colorResource(id = R.color.times)
         )
     )
 }

@@ -1,15 +1,14 @@
 package com.example.unicum.presentation.screens.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import com.example.unicum.domain.model.Coffee
-import com.example.unicum.presentation.Dimens.MediumPadding1
+import com.example.unicum.presentation.common.RuneroBox
 import com.example.unicum.presentation.screens.home.components.CoffeeList
-import com.example.unicum.presentation.screens.home.components.RuneroBox
 
 @Composable
 fun HomeScreen(
@@ -17,12 +16,11 @@ fun HomeScreen(
     navigateToDetails: (Coffee) -> Unit
 ) {
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black)
     ) {
         RuneroBox()
-
-        Spacer(modifier = Modifier.height(MediumPadding1))
-
         CoffeeList(
             coffees = state.coffees,
             onClick = navigateToDetails

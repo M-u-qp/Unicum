@@ -12,4 +12,7 @@
     <color name="name_text">#FFC4A79B</color>
     <color name="border_window">#FF261A18</color>
     <color name="runero">#FF5A4036</color>
+    <color name="times">#FF896C61</color>
+    <color name="button_text">#FFFFFAF7</color>
+    <color name="text_field_color">#FFFFF2ED</color>
 </resources>
