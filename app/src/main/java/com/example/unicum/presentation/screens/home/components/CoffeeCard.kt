@@ -19,6 +19,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import com.example.unicum.R
 import com.example.unicum.domain.model.Coffee
@@ -75,7 +77,7 @@ fun CoffeeCard(
                 style = MaterialTheme.typography.bodySmall.copy(
                     fontWeight = FontWeight.Bold,
                     fontSize = MediumFontSize1,
-//                    fontFamily = FontFamily(Font(R.font.montserrat_regular))
+                    fontFamily = FontFamily(Font(R.font.montserrat_regular))
                 ),
                 color = colorResource(id = R.color.name_text)
             )
@@ -96,7 +98,7 @@ fun CoffeeCard(
                     text = stringResource(id = R.string.v),
                     style = MaterialTheme.typography.bodySmall.copy(
                         fontSize = MediumFontSize2,
-//                    fontFamily = FontFamily(Font(R.font.montserrat_regular))
+                    fontFamily = FontFamily(Font(R.font.montserrat_regular))
                     ),
                     color = colorResource(id = R.color.v_text)
                 )
@@ -107,7 +109,7 @@ fun CoffeeCard(
                         style = MaterialTheme.typography.bodyMedium.copy(
                             fontWeight = FontWeight.Bold,
                             fontSize = MediumFontSize3,
-//                    fontFamily = FontFamily(Font(R.font.montserrat_regular))
+                    fontFamily = FontFamily(Font(R.font.montserrat_regular))
                         ),
                         color = colorResource(id = R.color.price_text)
                     )
@@ -116,15 +118,3 @@ fun CoffeeCard(
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun PreviewCardCoffee() {
-//    CoffeeCard(Coffee(
-//        name = "Капучино эконом",
-//        price = 199,
-//        sellFree = false,
-//        viewGlass = 1
-//    ),
-//        onClick = {})
-//}

@@ -15,7 +15,6 @@ fun CoffeeList(
     coffees: List<Coffee>,
     onClick: (Coffee) -> Unit
 ) {
-    RuneroBox()
     LazyVerticalGrid(
         modifier = modifier
             .fillMaxSize()
