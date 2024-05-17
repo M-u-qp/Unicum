@@ -10,4 +10,6 @@
     <color name="price_text">#FFF77416</color>
     <color name="v_text">#FF514541</color>
     <color name="name_text">#FFC4A79B</color>
+    <color name="border_window">#FF261A18</color>
+    <color name="runero">#FF5A4036</color>
 </resources>

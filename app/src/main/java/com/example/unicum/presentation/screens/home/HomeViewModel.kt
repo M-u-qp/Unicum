@@ -1,6 +1,5 @@
 package com.example.unicum.presentation.screens.home
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -8,12 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.unicum.domain.model.Coffee
 import com.example.unicum.domain.usecases.CoffeeUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
+const val TAGGG = "my tag"
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val coffeeUseCases: CoffeeUseCases
@@ -43,10 +43,10 @@ class HomeViewModel @Inject constructor(
         )
         val listCoffee = MutableList(15) { coffee }
         viewModelScope.launch {
-            val coffeeCount = coffeeUseCases.selectCoffees.invoke().count()
-            Log.d("MYTAGS", "$coffeeCount")
-            if (coffeeCount == 0) {
-                coffeeUseCases.insertCoffees(listCoffee)
+            coffeeUseCases.selectCoffees.invoke().collect {
+                if (it.isEmpty()) {
+                    coffeeUseCases.insertCoffees(listCoffee)
+                }
             }
         }
     }

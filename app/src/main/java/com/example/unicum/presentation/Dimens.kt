@@ -8,6 +8,7 @@ object Dimens {
     //padding
     val MediumPadding1 = 24.dp
     val MediumPadding2 = 16.dp
+    val MediumPadding3 = 12.dp
     val SmallPadding1 = 9.dp
 
     //shape

@@ -7,7 +7,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.unicum.domain.model.Coffee
-import com.example.unicum.presentation.Dimens.MediumPadding1
+import com.example.unicum.presentation.Dimens.MediumPadding3
 
 @Composable
 fun CoffeeList(
@@ -15,10 +15,11 @@ fun CoffeeList(
     coffees: List<Coffee>,
     onClick: (Coffee) -> Unit
 ) {
+    RuneroBox()
     LazyVerticalGrid(
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = MediumPadding1),
+            .padding(MediumPadding3),
         columns = GridCells.Fixed(5)
     ) {
         items(count = coffees.size) {

@@ -29,6 +29,7 @@ import com.example.unicum.presentation.Dimens.MediumFontSize1
 import com.example.unicum.presentation.Dimens.MediumFontSize2
 import com.example.unicum.presentation.Dimens.MediumFontSize3
 import com.example.unicum.presentation.Dimens.MediumPadding2
+import com.example.unicum.presentation.Dimens.MediumPadding3
 import com.example.unicum.presentation.Dimens.SmallPadding1
 import com.example.unicum.presentation.Dimens.SmallShape1
 import com.example.unicum.ui.theme.gradientCard
@@ -42,7 +43,7 @@ fun CoffeeCard(
 ) {
     Card(
         modifier = Modifier
-            .padding()
+            .padding(MediumPadding3)
             .background(Color.Transparent),
         shape = RoundedCornerShape(SmallShape1),
         onClick = { onClick(coffee) }
