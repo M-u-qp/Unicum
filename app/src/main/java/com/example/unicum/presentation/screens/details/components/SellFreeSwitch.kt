@@ -21,27 +21,31 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.dp
 import com.example.unicum.R
+import com.example.unicum.domain.model.Coffee
 import com.example.unicum.presentation.Dimens
+import com.example.unicum.presentation.Dimens.MediumPadding1
+import com.example.unicum.presentation.Dimens.MediumPadding3
 import com.example.unicum.presentation.Dimens.NormalBorder1
+import com.example.unicum.presentation.Dimens.SmallShape1
 import com.example.unicum.ui.theme.Orange
 
 @Composable
-fun SellFreeSwitch() {
-    var switchState by remember { mutableStateOf(false) }
+fun SellFreeSwitch(coffee: Coffee) {
+    var coffeeFreeState by remember { mutableStateOf(coffee.sellFree) }
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 64.dp),
+            .padding(top = MediumPadding3),
         border = BorderStroke(
             width = NormalBorder1,
             color = colorResource(id = R.color.border_window)
         ),
-        shape = RoundedCornerShape(6.dp)
+        shape = RoundedCornerShape(SmallShape1)
     ) {
         Row(
             modifier = Modifier
@@ -51,22 +55,26 @@ fun SellFreeSwitch() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                modifier = Modifier.padding(start = 24.dp),
-                text = "Продавать бесплатно",
+                modifier = Modifier.padding(start = MediumPadding1),
+                text = stringResource(id = R.string.coffee_free),
                 style = MaterialTheme.typography.bodySmall.copy(
                     fontSize = Dimens.MediumFontSize2,
                     fontFamily = FontFamily(Font(R.font.montserrat_regular)),
                     color = colorResource(id = R.color.times)
                 )
             )
-            Switch(colors = SwitchDefaults.colors(
-                checkedThumbColor = Color.White,
-                checkedTrackColor = Orange,
-                uncheckedThumbColor = Color.White,
-                uncheckedTrackColor = Orange
-            ), checked = switchState, onCheckedChange = { isChecked ->
-                switchState = isChecked
-            })
+            Switch(
+                modifier = Modifier
+                    .padding(end = MediumPadding1),
+                colors = SwitchDefaults.colors(
+                    checkedThumbColor = Color.White,
+                    checkedTrackColor = Orange,
+                    uncheckedThumbColor = Color.White,
+                    uncheckedTrackColor = Orange
+                ), checked = coffeeFreeState, onCheckedChange = { isChecked ->
+                    coffeeFreeState = isChecked
+                    coffee.sellFree = coffeeFreeState
+                })
         }
     }
 }

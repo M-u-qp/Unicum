@@ -13,14 +13,15 @@ import com.example.unicum.presentation.screens.home.components.CoffeeList
 @Composable
 fun HomeScreen(
     state: HomeState,
-    navigateToDetails: (Coffee) -> Unit
+    navigateToDetails: (Coffee) -> Unit,
+    navigateUp: () -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
     ) {
-        RuneroBox()
+        RuneroBox(navigateUp)
         CoffeeList(
             coffees = state.coffees,
             onClick = navigateToDetails

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.unicum.domain.model.Coffee
 import com.example.unicum.domain.usecases.CoffeeUseCases
+import com.example.unicum.utils.UIComponent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,24 +17,25 @@ class DetailsViewModel @Inject constructor(
     private val coffeeUseCases: CoffeeUseCases
 ): ViewModel() {
 
- var sideEffect by mutableStateOf<String?>(null)
+ var sideEffect by mutableStateOf<UIComponent?>(null)
      private set
     fun onEvent(event: DetailsEvent){
         when(event){
             is DetailsEvent.UpdateCoffee -> {
                 viewModelScope.launch {
                     val coffee = coffeeUseCases.selectCoffee(event.coffee.id)
-                    if (coffee == null) updateCoffee(event.coffee)
+                    if (coffee != null) updateCoffee(event.coffee)
                 }
             }
             is DetailsEvent.RemoveSideEffect -> {
                 sideEffect = null
             }
+            else -> Unit
         }
     }
 
     private suspend fun updateCoffee(coffee: Coffee) {
         coffeeUseCases.updateCoffee(coffee)
-        sideEffect = "Coffee Save"
+        sideEffect = UIComponent.Toast("Coffee Save")
     }
 }

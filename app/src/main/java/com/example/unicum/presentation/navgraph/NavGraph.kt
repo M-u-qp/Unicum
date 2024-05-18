@@ -2,10 +2,13 @@ package com.example.unicum.presentation.navgraph
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.unicum.domain.model.Coffee
 import com.example.unicum.presentation.screens.details.DetailsScreen
+import com.example.unicum.presentation.screens.details.DetailsViewModel
 import com.example.unicum.presentation.screens.home.HomeScreen
 import com.example.unicum.presentation.screens.home.HomeViewModel
 
@@ -20,13 +23,30 @@ fun NavGraph() {
             val viewModel: HomeViewModel = hiltViewModel()
             HomeScreen(
                 state = viewModel.state.value,
-                navigateToDetails = {
-                    navController.navigate(Route.DetailsScreen.route)
-                }
+                navigateToDetails = { coffee ->
+                    navigateToDetails(
+                        navController = navController,
+                        coffee = coffee
+                    )
+                },
+                navigateUp = { navController.navigateUp() }
             )
         }
         composable(route = Route.DetailsScreen.route) {
-            DetailsScreen()
+            val viewModel: DetailsViewModel = hiltViewModel()
+            navController.previousBackStackEntry?.savedStateHandle?.get<Coffee?>("coffee")
+                ?.let { coffee ->
+                    DetailsScreen(coffee = coffee,
+                        viewModel::onEvent,
+                        viewModel.sideEffect,
+                        navigateUp = { navController.navigateUp() })
+                }
+
         }
     }
+}
+
+private fun navigateToDetails(navController: NavController, coffee: Coffee) {
+    navController.currentBackStackEntry?.savedStateHandle?.set("coffee", coffee)
+    navController.navigate(route = Route.DetailsScreen.route)
 }

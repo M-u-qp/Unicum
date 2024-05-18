@@ -41,14 +41,14 @@ import com.example.unicum.utils.Constants.RUB
 @Composable
 fun CoffeeCard(
     coffee: Coffee,
-    onClick: (Coffee) -> Unit
+    onClick: (() -> Unit)? = null
 ) {
     Card(
         modifier = Modifier
             .padding(MediumPadding3)
             .background(Color.Transparent),
         shape = RoundedCornerShape(SmallShape1),
-        onClick = { onClick(coffee) }
+        onClick = { onClick?.invoke() }
     ) {
         Column(
             modifier = Modifier

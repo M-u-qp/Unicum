@@ -13,7 +13,6 @@ val Pink40 = Color(0xFF7D5260)
 
 val DarkCoffee = Color(0xFF150E0C)
 val Orange = Color(0xFFF77416)
-val Beige = Color(0xFFFFF2ED)
 
 val gradientPrice = androidx.compose.ui.graphics.Brush.linearGradient(
     colors = listOf(

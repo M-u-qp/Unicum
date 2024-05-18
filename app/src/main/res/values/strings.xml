@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Unicum</string>
     <string name="v">0.33</string>
+    <string name="coffee_name">Наименование</string>
+    <string name="coffee_price">Цена</string>
+    <string name="coffee_save">Сохранить</string>
+    <string name="coffee_free">Продавать бесплатно</string>
 </resources>

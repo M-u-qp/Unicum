@@ -45,7 +45,7 @@ fun RandomDegree() {
     )
     Icon(
         modifier = Modifier
-            .offset(y = Dimens.ExtraSmallOffset)
+            .offset(y = Dimens.ExtraSmallOffset1)
             .padding(end = Dimens.MediumPadding1),
         painter = painterResource(id = R.drawable.ic_droplet),
         contentDescription = null,

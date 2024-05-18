@@ -1,6 +1,7 @@
 package com.example.unicum.presentation.common
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,11 +25,9 @@ import com.example.unicum.presentation.Dimens.MediumPadding3
 import com.example.unicum.presentation.Dimens.MediumPadding4
 import com.example.unicum.presentation.Dimens.MediumPadding5
 import com.example.unicum.presentation.Dimens.NormalBorder1
-import com.example.unicum.presentation.common.CurrentTime
-import com.example.unicum.presentation.common.RandomDegree
 
 @Composable
-fun RuneroBox() {
+fun RuneroBox(navigateUp: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -36,11 +35,13 @@ fun RuneroBox() {
         contentAlignment = Alignment.CenterStart,
     ) {
         Row(
-            modifier = Modifier.padding(
-                start = MediumPadding4,
-                top = MediumPadding5,
-                bottom = MediumPadding5
-            )
+            modifier = Modifier
+                .padding(
+                    start = MediumPadding4,
+                    top = MediumPadding5,
+                    bottom = MediumPadding5
+                )
+                .clickable { navigateUp() }
         ) {
             Icon(
                 modifier = Modifier
