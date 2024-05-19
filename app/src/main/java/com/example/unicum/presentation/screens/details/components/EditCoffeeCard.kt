@@ -1,6 +1,8 @@
 package com.example.unicum.presentation.screens.details.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,10 +20,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -64,6 +69,7 @@ import com.example.unicum.presentation.Dimens.SmallShape1
 import com.example.unicum.presentation.screens.details.DetailsEvent
 import com.example.unicum.ui.theme.DarkCoffee
 import com.example.unicum.ui.theme.Orange
+import com.example.unicum.utils.Constants.RUB
 
 @Composable
 fun EditCoffeeCard(
@@ -74,12 +80,17 @@ fun EditCoffeeCard(
     var coffeeName by remember { mutableStateOf(coffee.name) }
     var coffeePrice by remember { mutableIntStateOf(coffee.price) }
     var coffeeGlass by remember { mutableIntStateOf(coffee.viewGlass) }
+    var coffeeFreeState by remember { mutableStateOf(coffee.sellFree) }
     val textFieldStyle = TextStyle(
         fontSize = MediumFontSize4,
         fontWeight = FontWeight.Bold,
         fontFamily = FontFamily(Font(R.font.montserrat_regular)),
         color = colorResource(id = R.color.text_field_color)
     )
+    fun isSaveButtonEnabled(): Boolean {
+        return coffee.name != coffeeName || coffee.price != coffeePrice
+                || coffee.sellFree != coffeeFreeState || coffee.viewGlass != coffeeGlass
+    }
     Row(
         modifier = Modifier
             .fillMaxSize(),
@@ -137,22 +148,78 @@ fun EditCoffeeCard(
                     focusedContainerColor = DarkCoffee
                 ),
                 value = coffeePrice.toString(),
+                trailingIcon = {
+                    Text(
+                        text = RUB,
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            fontSize = Dimens.MediumFontSize2,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily(Font(R.font.montserrat_regular)),
+                            color = colorResource(id = R.color.times)
+                        )
+                    )
+                },
                 onValueChange = { newPrice ->
                     if (newPrice.isNotEmpty()) {
                         coffeePrice = newPrice.toInt()
                     }
                 },
+                enabled = !coffeeFreeState,
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
             )
-            SellFreeSwitch(coffee = coffee)
+
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = MediumPadding3),
+                border = BorderStroke(
+                    width = Dimens.NormalBorder1,
+                    color = colorResource(id = R.color.border_window)
+                ),
+                shape = RoundedCornerShape(SmallShape1)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.Black),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        modifier = Modifier.padding(start = Dimens.MediumPadding1),
+                        text = stringResource(id = R.string.coffee_free),
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            fontSize = Dimens.MediumFontSize2,
+                            fontFamily = FontFamily(Font(R.font.montserrat_regular)),
+                            color = colorResource(id = R.color.times)
+                        )
+                    )
+                    Switch(
+                        modifier = Modifier
+                            .padding(end = Dimens.MediumPadding1),
+                        colors = SwitchDefaults.colors(
+                            checkedThumbColor = Color.White,
+                            checkedTrackColor = Orange,
+                            uncheckedThumbColor = Color.White,
+                            uncheckedTrackColor = Orange
+                        ), checked = coffeeFreeState, onCheckedChange = { isChecked ->
+                            coffeeFreeState = isChecked
+                            coffeePrice = if (isChecked) 0 else 199
+                        })
+                }
+            }
+
             Button(
                 modifier = Modifier
                     .padding(top = BigPadding1),
                 shape = RoundedCornerShape(SmallShape1),
                 colors = ButtonDefaults.buttonColors(containerColor = Orange),
+                enabled = isSaveButtonEnabled(),
                 onClick = {
                     coffee.name = coffeeName
                     coffee.price = coffeePrice
+                    coffee.viewGlass = coffeeGlass
+                    coffee.sellFree = coffeeFreeState
                     event(DetailsEvent.UpdateCoffee(coffee))
                     navigateUp()
                 }) {
@@ -172,9 +239,8 @@ fun EditCoffeeCard(
             modifier = Modifier
                 .alpha(if (coffeeGlass == 0) 1f else 0.3f)
                 .clickable {
-                coffeeGlass = 0
-                coffee.viewGlass = coffeeGlass
-            },
+                    coffeeGlass = 0
+                },
             contentAlignment = Alignment.BottomCenter
         ) {
             Image(
@@ -206,7 +272,6 @@ fun EditCoffeeCard(
                 .alpha(if (coffeeGlass == 1) 1f else 0.3f)
                 .clickable {
                     coffeeGlass = 1
-                    coffee.viewGlass = coffeeGlass
                 },
             contentAlignment = Alignment.BottomCenter
         ) {

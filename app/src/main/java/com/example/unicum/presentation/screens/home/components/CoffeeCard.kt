@@ -3,9 +3,11 @@ package com.example.unicum.presentation.screens.home.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -30,6 +32,7 @@ import com.example.unicum.presentation.Dimens.ImageMediumSize1
 import com.example.unicum.presentation.Dimens.MediumFontSize1
 import com.example.unicum.presentation.Dimens.MediumFontSize2
 import com.example.unicum.presentation.Dimens.MediumFontSize3
+import com.example.unicum.presentation.Dimens.MediumOffset1
 import com.example.unicum.presentation.Dimens.MediumPadding2
 import com.example.unicum.presentation.Dimens.MediumPadding3
 import com.example.unicum.presentation.Dimens.SmallPadding1
@@ -67,6 +70,7 @@ fun CoffeeCard(
 
                 else -> Image(
                     modifier = Modifier
+                        .offset(y = MediumOffset1)
                         .size(ImageMediumSize1),
                     painter = painterResource(id = R.drawable.img_1),
                     contentDescription = null
@@ -89,31 +93,55 @@ fun CoffeeCard(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    modifier = Modifier.padding(
-                        start = MediumPadding2,
-                        top = SmallPadding1,
-                        bottom = SmallPadding1
-                    ),
-                    text = stringResource(id = R.string.v),
-                    style = MaterialTheme.typography.bodySmall.copy(
-                        fontSize = MediumFontSize2,
-                    fontFamily = FontFamily(Font(R.font.montserrat_regular))
-                    ),
-                    color = colorResource(id = R.color.v_text)
-                )
-                if (!coffee.sellFree) {
-                    Text(
-                        modifier = Modifier.padding(end = MediumPadding2),
-                        text = "${coffee.price} $RUB",
-                        style = MaterialTheme.typography.bodyMedium.copy(
-                            fontWeight = FontWeight.Bold,
-                            fontSize = MediumFontSize3,
-                    fontFamily = FontFamily(Font(R.font.montserrat_regular))
-                        ),
-                        color = colorResource(id = R.color.price_text)
-                    )
+                when {
+                    coffee.sellFree -> {
+                        Box(
+                            modifier = Modifier.fillMaxWidth(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                modifier = Modifier.padding(
+                                    start = MediumPadding2,
+                                    top = SmallPadding1,
+                                    bottom = SmallPadding1
+                                ),
+                                text = stringResource(id = R.string.v),
+                                style = MaterialTheme.typography.bodySmall.copy(
+                                    fontSize = MediumFontSize2,
+                                    fontFamily = FontFamily(Font(R.font.montserrat_regular))
+                                ),
+                                color = colorResource(id = R.color.v_text)
+                            )
+                        }
+                    }
+
+                    else -> {
+                        Text(
+                            modifier = Modifier.padding(
+                                start = MediumPadding2,
+                                top = SmallPadding1,
+                                bottom = SmallPadding1
+                            ),
+                            text = stringResource(id = R.string.v),
+                            style = MaterialTheme.typography.bodySmall.copy(
+                                fontSize = MediumFontSize2,
+                                fontFamily = FontFamily(Font(R.font.montserrat_regular))
+                            ),
+                            color = colorResource(id = R.color.v_text)
+                        )
+                        Text(
+                            modifier = Modifier.padding(end = MediumPadding2),
+                            text = "${coffee.price} $RUB",
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                fontWeight = FontWeight.Bold,
+                                fontSize = MediumFontSize3,
+                                fontFamily = FontFamily(Font(R.font.montserrat_regular))
+                            ),
+                            color = colorResource(id = R.color.price_text)
+                        )
+                    }
                 }
+
             }
         }
     }
