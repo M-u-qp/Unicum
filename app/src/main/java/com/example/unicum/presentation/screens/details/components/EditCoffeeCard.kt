@@ -70,6 +70,7 @@ import com.example.unicum.presentation.screens.details.DetailsEvent
 import com.example.unicum.ui.theme.DarkCoffee
 import com.example.unicum.ui.theme.Orange
 import com.example.unicum.utils.Constants.RUB
+import java.lang.NumberFormatException
 
 @Composable
 fun EditCoffeeCard(
@@ -160,8 +161,12 @@ fun EditCoffeeCard(
                     )
                 },
                 onValueChange = { newPrice ->
-                    if (newPrice.isNotEmpty()) {
-                        coffeePrice = newPrice.toInt()
+                    try {
+                        if (newPrice.isNotEmpty()) {
+                            coffeePrice = newPrice.toInt()
+                        }
+                    }catch (e: NumberFormatException) {
+                        coffeePrice = 0
                     }
                 },
                 enabled = !coffeeFreeState,
