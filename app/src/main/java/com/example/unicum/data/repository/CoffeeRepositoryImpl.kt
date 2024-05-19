@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.Flow
 class CoffeeRepositoryImpl(
     private val coffeeDao: CoffeeDao
 ) : CoffeeRepository {
-    override suspend fun updateCoffee(coffee: Coffee) {
-        coffeeDao.update(coffee)
+    override suspend fun updateCoffee(listCoffee: List<Coffee>) {
+        coffeeDao.update(listCoffee)
     }
 
     override suspend fun insertCoffees(listCoffee: List<Coffee>) {

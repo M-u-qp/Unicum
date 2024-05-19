@@ -1,7 +1,12 @@
 package com.example.unicum.presentation.common
 
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -9,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -17,6 +23,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import com.example.unicum.R
 import com.example.unicum.presentation.Dimens
+import com.example.unicum.presentation.Dimens.DividerMediumHeight
+import com.example.unicum.presentation.Dimens.DividerMediumWidth
+import com.example.unicum.presentation.Dimens.MediumPadding1
+import com.example.unicum.presentation.Dimens.NormalBorder1
 import com.example.unicum.utils.Constants
 import kotlinx.coroutines.delay
 import kotlin.math.roundToInt
@@ -32,25 +42,32 @@ fun RandomDegree() {
             delay(1000)
         }
     }
-
-    Text(
-        modifier = Modifier.padding(start = Dimens.MediumPadding1),
-        text = "${randomNumber.doubleValue}${Constants.DEGREE}",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontWeight = FontWeight.Bold,
-            fontSize = Dimens.MediumFontSize2,
-            fontFamily = FontFamily(Font(R.font.montserrat_regular)),
-            color = colorResource(id = R.color.times)
-        )
-    )
-    Icon(
+    Row(
         modifier = Modifier
-            .offset(y = Dimens.ExtraSmallOffset1)
-            .padding(end = Dimens.MediumPadding1),
-        painter = painterResource(id = R.drawable.ic_droplet),
-        contentDescription = null,
-        tint = colorResource(id = R.color.times)
-    )
+        .padding(end = MediumPadding1)
+        .height(DividerMediumHeight)
+        .border(width = NormalBorder1, color = colorResource(id = R.color.border_window)),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+        ) {
+        Text(
+            modifier = Modifier.padding(start = MediumPadding1).width(DividerMediumWidth),
+            text = "${randomNumber.doubleValue}${Constants.DEGREE}",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontWeight = FontWeight.Bold,
+                fontSize = Dimens.MediumFontSize2,
+                fontFamily = FontFamily(Font(R.font.montserrat_regular)),
+                color = colorResource(id = R.color.times)
+            )
+        )
+        Icon(
+            modifier = Modifier
+                .offset(y = Dimens.ExtraSmallOffset1),
+            painter = painterResource(id = R.drawable.ic_droplet),
+            contentDescription = null,
+            tint = colorResource(id = R.color.times)
+        )
+    }
 }
 
 fun generateRandomNumber(): Double {

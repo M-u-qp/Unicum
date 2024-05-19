@@ -22,6 +22,7 @@ fun NavGraph() {
         composable(route = Route.HomeScreen.route) {
             val viewModel: HomeViewModel = hiltViewModel()
             HomeScreen(
+                navController = navController,
                 state = viewModel.state.value,
                 navigateToDetails = { coffee ->
                     navigateToDetails(
@@ -30,16 +31,22 @@ fun NavGraph() {
                     )
                 },
                 navigateUp = { navController.navigateUp() }
+
             )
         }
         composable(route = Route.DetailsScreen.route) {
             val viewModel: DetailsViewModel = hiltViewModel()
+            val homeViewModel: HomeViewModel = hiltViewModel()
             navController.previousBackStackEntry?.savedStateHandle?.get<Coffee?>("coffee")
                 ?.let { coffee ->
-                    DetailsScreen(coffee = coffee,
+                    DetailsScreen(
+                        navController = navController,
+                        coffee = coffee,
+                        listCoffees = homeViewModel.state.value.coffees,
                         viewModel::onEvent,
                         viewModel.sideEffect,
-                        navigateUp = { navController.navigateUp() })
+                        navigateUp = { navController.navigateUp() }
+                    )
                 }
 
         }

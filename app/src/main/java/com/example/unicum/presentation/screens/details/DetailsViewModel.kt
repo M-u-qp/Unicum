@@ -23,8 +23,9 @@ class DetailsViewModel @Inject constructor(
         when(event){
             is DetailsEvent.UpdateCoffee -> {
                 viewModelScope.launch {
-                    val coffee = coffeeUseCases.selectCoffee(event.coffee.id)
-                    if (coffee != null) updateCoffee(event.coffee)
+                    coffeeUseCases.selectCoffees().collect{
+                        if (it.isNotEmpty()) updateCoffee(event.listCoffee)
+                    }
                 }
             }
             is DetailsEvent.RemoveSideEffect -> {
@@ -34,8 +35,8 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
-    private suspend fun updateCoffee(coffee: Coffee) {
-        coffeeUseCases.updateCoffee(coffee)
+    private suspend fun updateCoffee(listCoffee: List<Coffee>) {
+        coffeeUseCases.updateCoffee(listCoffee)
         sideEffect = UIComponent.Toast("Coffee Save")
     }
 }

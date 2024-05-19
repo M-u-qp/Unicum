@@ -6,7 +6,7 @@ import com.example.unicum.domain.model.Coffee
 class UpdateCoffee(
     private val coffeeDao: CoffeeDao
 ) {
-    suspend operator fun invoke(coffee: Coffee){
-        coffeeDao.update(coffee)
+    suspend operator fun invoke(listCoffee: List<Coffee>){
+        coffeeDao.update(listCoffee)
     }
 }

@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import com.example.unicum.R
 import com.example.unicum.presentation.Dimens
+import com.example.unicum.presentation.Dimens.MediumPadding1
 import kotlinx.coroutines.delay
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -31,9 +32,8 @@ fun CurrentTime() {
     val timeString = remember(currentTimeState.value) {
         currentTimeState.value.format(DateTimeFormatter.ofPattern("HH:mm"))
     }
-
     Text(
-        modifier = Modifier.padding(horizontal = Dimens.MediumPadding1),
+        modifier = Modifier.padding(end = MediumPadding1),
         text = timeString,
         style = MaterialTheme.typography.bodySmall.copy(
             fontWeight = FontWeight.Bold,

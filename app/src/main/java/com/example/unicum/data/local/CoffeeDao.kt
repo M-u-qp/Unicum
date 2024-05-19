@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 interface CoffeeDao {
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun update(coffee: Coffee)
+    suspend fun update(listCoffee: List<Coffee>)
 
     @Insert
     suspend fun insert(listCoffee: List<Coffee>)

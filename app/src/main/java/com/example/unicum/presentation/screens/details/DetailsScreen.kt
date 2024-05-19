@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavController
 import com.example.unicum.domain.model.Coffee
 import com.example.unicum.presentation.common.RuneroBox
 import com.example.unicum.presentation.screens.details.components.EditCoffeeCard
@@ -18,7 +19,9 @@ import com.example.unicum.utils.UIComponent
 
 @Composable
 fun DetailsScreen(
+    navController: NavController,
     coffee: Coffee,
+    listCoffees: List<Coffee>,
     event: (DetailsEvent) -> Unit,
     sideEffect: UIComponent?,
     navigateUp: () -> Unit
@@ -39,12 +42,15 @@ fun DetailsScreen(
             .fillMaxSize()
             .background(Color.Black)
     ) {
-        RuneroBox(navigateUp)
+        RuneroBox(
+            navController = navController,
+            navigateUp = navigateUp
+        )
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            EditCoffeeCard(coffee = coffee, event = event, navigateUp = navigateUp)
+            EditCoffeeCard(coffee = coffee, listCoffees = listCoffees, event = event, navigateUp = navigateUp)
         }
     }
 }

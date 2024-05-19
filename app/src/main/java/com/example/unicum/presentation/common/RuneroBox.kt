@@ -2,12 +2,12 @@ package com.example.unicum.presentation.common
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,6 +18,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.navigation.NavController
 import com.example.unicum.R
 import com.example.unicum.presentation.Dimens
 import com.example.unicum.presentation.Dimens.IconSize1
@@ -25,14 +26,21 @@ import com.example.unicum.presentation.Dimens.MediumPadding3
 import com.example.unicum.presentation.Dimens.MediumPadding4
 import com.example.unicum.presentation.Dimens.MediumPadding5
 import com.example.unicum.presentation.Dimens.NormalBorder1
+import com.example.unicum.presentation.navgraph.Route
 
 @Composable
-fun RuneroBox(navigateUp: () -> Unit) {
-    Box(
+fun RuneroBox(
+    navController: NavController,
+    navigateUp: () -> Unit,
+    onClick: (() -> Unit)? = null
+) {
+
+    Row(
         modifier = Modifier
             .fillMaxWidth()
             .border(width = NormalBorder1, color = colorResource(id = R.color.border_window)),
-        contentAlignment = Alignment.CenterStart,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Row(
             modifier = Modifier
@@ -41,7 +49,13 @@ fun RuneroBox(navigateUp: () -> Unit) {
                     top = MediumPadding5,
                     bottom = MediumPadding5
                 )
-                .clickable { navigateUp() }
+                .clickable {
+                    if (navController.currentDestination?.route == Route.HomeScreen.route) {
+                        onClick?.invoke()
+                    } else {
+                        navigateUp()
+                    }
+                }
         ) {
             Icon(
                 modifier = Modifier
@@ -59,9 +73,17 @@ fun RuneroBox(navigateUp: () -> Unit) {
                     color = colorResource(id = R.color.runero)
                 )
             )
-            Spacer(modifier = Modifier.weight(1f))
+        }
+        Row(verticalAlignment = Alignment.CenterVertically) {
             CurrentTime()
             RandomDegree()
+            CurrentRegion()
         }
     }
+
+    HorizontalDivider(
+        modifier = Modifier.fillMaxWidth(),
+        thickness = NormalBorder1,
+        color = colorResource(id = R.color.border_window)
+    )
 }

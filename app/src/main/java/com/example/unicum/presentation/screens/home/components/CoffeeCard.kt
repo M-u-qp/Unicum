@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import com.example.unicum.R
 import com.example.unicum.domain.model.Coffee
 import com.example.unicum.presentation.Dimens.CardHeightSize
@@ -44,14 +46,15 @@ import com.example.unicum.utils.Constants.RUB
 @Composable
 fun CoffeeCard(
     coffee: Coffee,
-    onClick: (() -> Unit)? = null
+//    onClick: (() -> Unit)? = null
 ) {
     Card(
         modifier = Modifier
             .padding(MediumPadding3)
             .background(Color.Transparent),
         shape = RoundedCornerShape(SmallShape1),
-        onClick = { onClick?.invoke() }
+        elevation = CardDefaults.cardElevation(0.dp)
+//        onClick = { onClick?.invoke() }
     ) {
         Column(
             modifier = Modifier

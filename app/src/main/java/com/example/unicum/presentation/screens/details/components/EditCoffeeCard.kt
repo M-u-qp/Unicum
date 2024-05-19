@@ -1,5 +1,6 @@
 package com.example.unicum.presentation.screens.details.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -40,6 +41,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -75,6 +77,7 @@ import java.lang.NumberFormatException
 @Composable
 fun EditCoffeeCard(
     coffee: Coffee,
+    listCoffees: List<Coffee>,
     event: (DetailsEvent) -> Unit,
     navigateUp: () -> Unit
 ) {
@@ -221,11 +224,17 @@ fun EditCoffeeCard(
                 colors = ButtonDefaults.buttonColors(containerColor = Orange),
                 enabled = isSaveButtonEnabled(),
                 onClick = {
-                    coffee.name = coffeeName
-                    coffee.price = coffeePrice
-                    coffee.viewGlass = coffeeGlass
-                    coffee.sellFree = coffeeFreeState
-                    event(DetailsEvent.UpdateCoffee(coffee))
+//                    coffee.name = coffeeName
+//                    coffee.price = coffeePrice
+//                    coffee.viewGlass = coffeeGlass
+//                    coffee.sellFree = coffeeFreeState
+                    listCoffees.map {
+                        it.name = coffeeName
+                        it.price = coffeePrice
+                        it.sellFree = coffeeFreeState
+                        it.viewGlass = coffeeGlass
+                    }
+                    event(DetailsEvent.UpdateCoffee(listCoffees))
                     navigateUp()
                 }) {
                 Text(
@@ -240,6 +249,76 @@ fun EditCoffeeCard(
                 )
             }
         }
+        val configuration = LocalConfiguration.current
+        val isPortrait = configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+        if (isPortrait){
+            Column(verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally) {
+                Box(
+                    modifier = Modifier
+                        .alpha(if (coffeeGlass == 0) 1f else 0.3f)
+                        .clickable {
+                            coffeeGlass = 0
+                        },
+                    contentAlignment = Alignment.BottomCenter
+                ) {
+                    Image(
+                        modifier = Modifier
+                            .padding(start = MediumPadding7)
+                            .size(ImageMediumSize2),
+                        painter = painterResource(id = R.drawable.img),
+                        contentDescription = null
+                    )
+                    if (coffeeGlass == 0) {
+                        IconButton(
+                            modifier = Modifier
+                                .offset(x = MediumOffset1, y = MediumMinusOffset1)
+                                .size(MediumIconSize1),
+                            onClick = {},
+                            colors = IconButtonDefaults.iconButtonColors(containerColor = Orange)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Check,
+                                contentDescription = null,
+                                tint = Color.White,
+                            )
+                        }
+                    }
+                }
+
+                Box(
+                    modifier = Modifier
+                        .alpha(if (coffeeGlass == 1) 1f else 0.3f)
+                        .clickable {
+                            coffeeGlass = 1
+                        },
+                    contentAlignment = Alignment.BottomCenter
+                ) {
+                    Image(
+                        modifier = Modifier
+                            .offset(y = MediumOffset1)
+                            .size(ImageMediumSize2),
+                        painter = painterResource(id = R.drawable.img_1),
+                        contentDescription = null
+                    )
+                    if (coffeeGlass == 1) {
+                        IconButton(
+                            modifier = Modifier
+                                .offset(x = ExtraSmallOffset2, y = MediumMinusOffset2)
+                                .size(MediumIconSize1),
+                            onClick = {},
+                            colors = IconButtonDefaults.iconButtonColors(containerColor = Orange)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Check,
+                                contentDescription = null,
+                                tint = Color.White,
+                            )
+                        }
+                    }
+                }
+            }
+        } else {
         Box(
             modifier = Modifier
                 .alpha(if (coffeeGlass == 0) 1f else 0.3f)
@@ -302,6 +381,7 @@ fun EditCoffeeCard(
                     )
                 }
             }
+        }
         }
     }
 }

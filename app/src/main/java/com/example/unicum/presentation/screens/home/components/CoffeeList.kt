@@ -13,7 +13,7 @@ import com.example.unicum.presentation.Dimens.MediumPadding3
 fun CoffeeList(
     modifier: Modifier = Modifier,
     coffees: List<Coffee>,
-    onClick: (Coffee) -> Unit
+//    onClick: (Coffee) -> Unit
 ) {
     LazyVerticalGrid(
         modifier = modifier
@@ -25,7 +25,7 @@ fun CoffeeList(
             val coffee = coffees[it]
             CoffeeCard(
                 coffee = coffee,
-                onClick = { onClick(coffee) }
+//                onClick = { onClick(coffee) }
             )
         }
     }
