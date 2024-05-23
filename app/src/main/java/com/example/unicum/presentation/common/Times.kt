@@ -13,7 +13,8 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import com.example.unicum.R
-import com.example.unicum.presentation.Dimens
+import com.example.unicum.presentation.Dimens.MediumFontSize2
+import com.example.unicum.presentation.Dimens.MediumPadding1
 import kotlinx.coroutines.delay
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -33,11 +34,11 @@ fun CurrentTime() {
     }
 
     Text(
-        modifier = Modifier.padding(horizontal = Dimens.MediumPadding1),
+        modifier = Modifier.padding(end = MediumPadding1),
         text = timeString,
         style = MaterialTheme.typography.bodySmall.copy(
             fontWeight = FontWeight.Bold,
-            fontSize = Dimens.MediumFontSize2,
+            fontSize = MediumFontSize2,
             fontFamily = FontFamily(Font(R.font.montserrat_regular)),
             color = colorResource(id = R.color.times)
         )

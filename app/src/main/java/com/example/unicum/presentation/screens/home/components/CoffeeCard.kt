@@ -55,6 +55,7 @@ fun CoffeeCard(
     ) {
         Column(
             modifier = Modifier
+                .fillMaxWidth()
                 .size(width = CardWidthSize, height = CardHeightSize)
                 .background(gradientCard),
             verticalArrangement = Arrangement.SpaceBetween,

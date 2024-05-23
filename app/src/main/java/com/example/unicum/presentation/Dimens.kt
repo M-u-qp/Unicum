@@ -8,6 +8,7 @@ object Dimens {
     //padding
     val LargePadding1 = 130.dp
     val BigPadding1 = 64.dp
+    val BigPadding2 = 50.dp
     val MediumPadding1 = 24.dp
     val MediumPadding2 = 16.dp
     val MediumPadding3 = 12.dp
@@ -27,8 +28,11 @@ object Dimens {
     val CardHeightSize = 313.dp
     val CardWidthSize = 227.dp
     val IconSize1 = 24.dp
+    val RegionIconSize = 17.dp
     val ColumnWidth = 418.dp
     val MediumIconSize1 = 24.dp
+    val DividerMediumHeight = 54.dp
+    val DividerMediumWidth = 51.dp
 
     //font size
     val MediumFontSize1 = 17.sp
