@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
@@ -19,17 +20,17 @@ import com.example.unicum.R
 import com.example.unicum.presentation.Dimens.BigPadding2
 import com.example.unicum.presentation.Dimens.IconSize1
 import com.example.unicum.presentation.Dimens.MediumFontSize2
-import com.example.unicum.presentation.Dimens.RegionIconSize
 
 @Composable
 fun CurrentRegion() {
     val systemLanguage = Locale.current
     Image(
         modifier = Modifier
-            .size(width = IconSize1, height = RegionIconSize)
+            .size(IconSize1)
             .background(Color.White),
         painter = painterResource(id = if (systemLanguage.region == "RU") R.drawable.img_2 else R.drawable.flag_usa),
-        contentDescription = null
+        contentDescription = null,
+        contentScale = ContentScale.Crop
     )
     Text(
         modifier = Modifier.padding(end = BigPadding2),

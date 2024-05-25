@@ -7,10 +7,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.IntSize
 import com.example.unicum.domain.model.Coffee
 import com.example.unicum.presentation.common.RuneroBox
 import com.example.unicum.presentation.screens.details.components.EditCoffeeCard
@@ -25,6 +29,7 @@ fun DetailsScreen(
     navigateUp: () -> Unit
 ) {
     val context = LocalContext.current
+    val containerSize = remember { mutableStateOf(IntSize.Zero) }
     LaunchedEffect(key1 = sideEffect) {
         sideEffect?.let {
             when (sideEffect) {
@@ -38,9 +43,10 @@ fun DetailsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .onSizeChanged { containerSize.value = it }
             .background(Color.Black)
     ) {
-        RuneroBox(navigateUp)
+        RuneroBox(navigateUp, containerSize.value)
 
         val configuration = LocalConfiguration.current
         when (configuration.orientation) {

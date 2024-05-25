@@ -4,7 +4,8 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,7 +30,6 @@ import androidx.compose.ui.text.font.FontWeight
 import com.example.unicum.R
 import com.example.unicum.domain.model.Coffee
 import com.example.unicum.presentation.Dimens.BigPadding1
-import com.example.unicum.presentation.Dimens.LargePadding1
 import com.example.unicum.presentation.Dimens.MediumFontSize4
 import com.example.unicum.presentation.Dimens.MediumPadding1
 import com.example.unicum.presentation.Dimens.SmallPadding2
@@ -56,15 +56,17 @@ fun EditCoffeeCard(
     }
     Row(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .horizontalScroll(state = scrollStateRow),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(
             modifier = Modifier
+                .fillMaxHeight()
                 .padding(start = MediumPadding1)
-                .verticalScroll(state = scrollStateColumn)
+                .verticalScroll(state = scrollStateColumn),
+            verticalArrangement = Arrangement.Center
         ) {
 
             TextFields(

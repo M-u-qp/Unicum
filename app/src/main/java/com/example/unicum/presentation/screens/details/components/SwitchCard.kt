@@ -68,7 +68,7 @@ fun SwitchCard(
             )
             Switch(
                 modifier = Modifier
-                    .padding(end = Dimens.MediumPadding1),
+                    .padding(horizontal = Dimens.MediumPadding1),
                 colors = SwitchDefaults.colors(
                     checkedThumbColor = Color.White,
                     checkedTrackColor = Orange,

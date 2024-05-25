@@ -1,20 +1,17 @@
 package com.example.unicum.presentation.common
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import com.example.unicum.R
 import com.example.unicum.presentation.Dimens.MediumFontSize2
-import com.example.unicum.presentation.Dimens.MediumPadding1
 import kotlinx.coroutines.delay
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -34,7 +31,6 @@ fun CurrentTime() {
     }
 
     Text(
-        modifier = Modifier.padding(end = MediumPadding1),
         text = timeString,
         style = MaterialTheme.typography.bodySmall.copy(
             fontWeight = FontWeight.Bold,

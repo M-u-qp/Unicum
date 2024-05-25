@@ -6,16 +6,15 @@ import androidx.compose.ui.unit.sp
 object Dimens {
 
     //padding
-    val LargePadding1 = 130.dp
     val BigPadding1 = 64.dp
     val BigPadding2 = 50.dp
     val MediumPadding1 = 24.dp
     val MediumPadding2 = 16.dp
     val MediumPadding3 = 12.dp
     val MediumPadding4 = 26.dp
-    val MediumPadding5 = 15.dp
+
     val MediumPadding6 = 32.dp
-    val MediumPadding7 = 30.dp
+
     val SmallPadding1 = 9.dp
     val SmallPadding2 = 6.dp
 
@@ -28,8 +27,6 @@ object Dimens {
     val CardHeightSize = 313.dp
     val CardWidthSize = 227.dp
     val IconSize1 = 24.dp
-    val RegionIconSize = 17.dp
-    val ColumnWidth = 418.dp
     val MediumIconSize1 = 24.dp
     val DividerMediumHeight = 54.dp
     val DividerMediumWidth = 51.dp

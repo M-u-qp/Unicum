@@ -1,7 +1,7 @@
 package com.example.unicum.presentation.screens.home.components
 
 import android.content.res.Configuration
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -19,12 +19,12 @@ fun CoffeeList(
 ) {
     val configuration = LocalConfiguration.current
     val gridCells = when (configuration.orientation) {
-        Configuration.ORIENTATION_LANDSCAPE -> { 5 }
+        Configuration.ORIENTATION_LANDSCAPE -> { 3 }
         else -> { 1 }
     }
     LazyVerticalGrid(
         modifier = modifier
-            .fillMaxSize()
+            .fillMaxHeight()
             .padding(MediumPadding3),
         columns = GridCells.Fixed(gridCells)
     ) {

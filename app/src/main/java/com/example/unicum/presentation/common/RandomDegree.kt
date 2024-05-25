@@ -46,11 +46,12 @@ fun RandomDegree() {
 
     Row(
         modifier = Modifier
-            .padding(end = MediumPadding1)
+            .padding(horizontal = MediumPadding1)
             .height(DividerMediumHeight)
             .border(width = NormalBorder1, color = colorResource(id = R.color.border_window)),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+
     ) {
 
         Text(

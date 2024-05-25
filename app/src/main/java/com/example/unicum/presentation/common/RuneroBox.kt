@@ -4,7 +4,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -13,37 +12,45 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.IntSize
 import com.example.unicum.R
 import com.example.unicum.presentation.Dimens.IconSize1
 import com.example.unicum.presentation.Dimens.MediumFontSize2
 import com.example.unicum.presentation.Dimens.MediumPadding3
 import com.example.unicum.presentation.Dimens.MediumPadding4
-import com.example.unicum.presentation.Dimens.MediumPadding5
 import com.example.unicum.presentation.Dimens.NormalBorder1
 
 @Composable
-fun RuneroBox(navigateUp: () -> Unit) {
+fun RuneroBox(navigateUp: () -> Unit, outsideContainerSize: IntSize) {
+
+    val isContentOverflowing = remember { mutableStateOf(false) }
+    val containerSize = remember { mutableStateOf(outsideContainerSize) }
+    val contentSize = remember { mutableStateOf(IntSize.Zero) }
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .onSizeChanged { contentSize.value = it }
             .border(width = NormalBorder1, color = colorResource(id = R.color.border_window)),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Row(
             modifier = Modifier
-                .padding(
-                    start = MediumPadding4,
-                    top = MediumPadding5,
-                    bottom = MediumPadding5
-                )
-                .clickable { navigateUp() }
+                .padding(start = MediumPadding4)
+                .clickable { navigateUp() },
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
         ) {
             Icon(
                 modifier = Modifier
@@ -53,6 +60,7 @@ fun RuneroBox(navigateUp: () -> Unit) {
                 contentDescription = null,
                 tint = colorResource(id = R.color.runero)
             )
+            if (isContentOverflowing.value)
             Text(
                 text = "RUNERO Touch",
                 style = MaterialTheme.typography.bodySmall.copy(
@@ -62,8 +70,9 @@ fun RuneroBox(navigateUp: () -> Unit) {
                 )
             )
         }
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Spacer(modifier = Modifier.weight(1f))
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             CurrentTime()
             RandomDegree()
             CurrentRegion()
@@ -74,4 +83,8 @@ fun RuneroBox(navigateUp: () -> Unit) {
         thickness = NormalBorder1,
         color = colorResource(id = R.color.border_window)
     )
+
+    LaunchedEffect(Unit) {
+        isContentOverflowing.value = contentSize.value.width < containerSize.value.width
+    }
 }
